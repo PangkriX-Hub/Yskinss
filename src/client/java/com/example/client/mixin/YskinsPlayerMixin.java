@@ -27,13 +27,13 @@ public abstract class YskinsPlayerMixin {
 		if (ExampleModClient.selectedSkin != null) {
 			Identifier id = YskinsTextures.load(
 				ExampleModClient.skinsDir, "skins", ExampleModClient.selectedSkin);
-			if (id != null) body = new ClientAsset.ResourceTexture(id);
+			if (id != null) body = new ClientAsset.ResourceTexture(id, id);
 		}
 		if (ExampleModClient.selectedCape != null) {
 			Identifier id = YskinsTextures.load(
 				ExampleModClient.capesDir, "capes", ExampleModClient.selectedCape);
 			if (id != null) {
-				cape = new ClientAsset.ResourceTexture(id);
+				cape = new ClientAsset.ResourceTexture(id, id);
 				elytra = cape;
 			}
 		}
