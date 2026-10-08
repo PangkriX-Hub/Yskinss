@@ -226,4 +226,4 @@ public class YskinsScreen extends Screen {
 		if (id == null || sz == null) return;
 		part(g, id, x, y, 20, 32, 1, 1, 10, 16, sz);
 	}
-           }
+	}
