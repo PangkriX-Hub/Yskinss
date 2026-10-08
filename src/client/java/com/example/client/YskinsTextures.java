@@ -14,6 +14,11 @@ import java.util.Map;
 
 public class YskinsTextures {
 	private static final Map<String, Identifier> CACHE = new HashMap<>();
+	private static final Map<String, int[]> SIZES = new HashMap<>();
+
+	public static int[] size(String kind, String fileName) {
+		return SIZES.get(kind + "/" + fileName);
+	}
 
 	public static Identifier load(Path dir, String kind, String fileName) {
 		String key = kind + "/" + fileName;
@@ -23,6 +28,7 @@ public class YskinsTextures {
 		Path file = dir.resolve(fileName);
 		try (InputStream in = Files.newInputStream(file)) {
 			NativeImage image = NativeImage.read(in);
+			SIZES.put(key, new int[]{image.getWidth(), image.getHeight()});
 			String safe = fileName.toLowerCase().replaceAll("[^a-z0-9._-]", "_");
 			Identifier id = Identifier.fromNamespaceAndPath(
 				"yskins", kind + "/" + safe + "_" + Integer.toHexString(fileName.hashCode()));
