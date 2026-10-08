@@ -1,4 +1,4 @@
-package com.example;
+package com.example.client;
 
 import com.mojang.brigadier.arguments.StringArgumentType;
 import net.fabricmc.api.ClientModInitializer;
