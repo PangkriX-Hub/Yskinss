@@ -45,7 +45,6 @@ public class ExampleModClient implements ClientModInitializer {
 		}
 		loadConfig();
 
-		// Keybind (default N, changeable in Controls)
 		KeyMapping.Category category = KeyMapping.Category.register(
 			Identifier.fromNamespaceAndPath("yskins", "main"));
 		openGuiKey = KeyBindingHelper.registerKeyBinding(new KeyMapping(
@@ -104,38 +103,4 @@ public class ExampleModClient implements ClientModInitializer {
 				}))));
 	}
 
-	public static List<String> names(Path dir) {
-		try (Stream<Path> s = Files.list(dir)) {
-			return s.map(p -> p.getFileName().toString())
-				.filter(n -> n.toLowerCase().endsWith(".png"))
-				.sorted()
-				.toList();
-		} catch (IOException e) {
-			return List.of();
-		}
-	}
-
-	private static void loadConfig() {
-		Properties p = new Properties();
-		try (InputStream in = Files.newInputStream(configFile)) {
-			p.load(in);
-		} catch (IOException e) {
-			return;
-		}
-		String skin = p.getProperty("skin");
-		String cape = p.getProperty("cape");
-		if (skin != null && names(skinsDir).contains(skin)) selectedSkin = skin;
-		if (cape != null && names(capesDir).contains(cape)) selectedCape = cape;
-	}
-
-	public static void saveConfig() {
-		Properties p = new Properties();
-		if (selectedSkin != null) p.setProperty("skin", selectedSkin);
-		if (selectedCape != null) p.setProperty("cape", selectedCape);
-		try (OutputStream out = Files.newOutputStream(configFile)) {
-			p.store(out, "Yskins");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-}
+	public static
