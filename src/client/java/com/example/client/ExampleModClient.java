@@ -5,6 +5,7 @@ import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.command.v2.ClientCommandManager;
 import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallback;
 import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.commands.SharedSuggestionProvider;
 import net.minecraft.network.chat.Component;
 
 import java.io.IOException;
@@ -40,32 +41,36 @@ public class ExampleModClient implements ClientModInitializer {
 				}))
 				.then(ClientCommandManager.literal("skin")
 					.then(ClientCommandManager.argument("name", StringArgumentType.greedyString())
+						.suggests((ctx, builder) ->
+							SharedSuggestionProvider.suggest(names(skinsDir), builder))
 						.executes(ctx -> {
 							String n = StringArgumentType.getString(ctx, "name");
 							if (!names(skinsDir).contains(n)) {
-								ctx.getSource().sendFeedback(Component.literal("Skin tidak ditemukan: " + n));
+								ctx.getSource().sendFeedback(Component.literal("Skin not found: " + n));
 								return 0;
 							}
 							selectedSkin = n;
-							ctx.getSource().sendFeedback(Component.literal("Skin dipilih: " + n));
+							ctx.getSource().sendFeedback(Component.literal("Skin selected: " + n));
 							return 1;
 						})))
 				.then(ClientCommandManager.literal("cape")
 					.then(ClientCommandManager.argument("name", StringArgumentType.greedyString())
+						.suggests((ctx, builder) ->
+							SharedSuggestionProvider.suggest(names(capesDir), builder))
 						.executes(ctx -> {
 							String n = StringArgumentType.getString(ctx, "name");
 							if (!names(capesDir).contains(n)) {
-								ctx.getSource().sendFeedback(Component.literal("Cape tidak ditemukan: " + n));
+								ctx.getSource().sendFeedback(Component.literal("Cape not found: " + n));
 								return 0;
 							}
 							selectedCape = n;
-							ctx.getSource().sendFeedback(Component.literal("Cape dipilih: " + n));
+							ctx.getSource().sendFeedback(Component.literal("Cape selected: " + n));
 							return 1;
 						})))
 				.then(ClientCommandManager.literal("reset").executes(ctx -> {
 					selectedSkin = null;
 					selectedCape = null;
-					ctx.getSource().sendFeedback(Component.literal("Skin dan cape direset"));
+					ctx.getSource().sendFeedback(Component.literal("Skin and cape reset"));
 					return 1;
 				}))));
 	}
