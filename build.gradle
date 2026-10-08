@@ -2,7 +2,9 @@ plugins {
 	id 'net.fabricmc.fabric-loom-remap' version "${loom_version}"
 	id 'maven-publish'
 }
-
+base {
+	archivesName = "yclient"
+}
 repositories {
 	// Add repositories to retrieve artifacts from in here.
 	// You should only use this when depending on other mods because
@@ -15,7 +17,7 @@ loom {
 	splitEnvironmentSourceSets()
 
 	mods {
-		"modid" {
+		"yclient" {
 			sourceSet sourceSets.main
 			sourceSet sourceSets.client
 		}
