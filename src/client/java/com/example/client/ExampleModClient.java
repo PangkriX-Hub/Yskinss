@@ -56,7 +56,7 @@ public class ExampleModClient implements ClientModInitializer {
 				}
 			}
 		});
-
+		ClientTickEvents.END_CLIENT_TICK.register(client -> YskinsTextures.tickAnimations());
 		ClientCommandRegistrationCallback.EVENT.register((dispatcher, registryAccess) ->
 			dispatcher.register(ClientCommandManager.literal("yskins")
 				.then(ClientCommandManager.literal("list").executes(ctx -> {
