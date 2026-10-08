@@ -1,25 +1,27 @@
 {
 	"schemaVersion": 1,
-	"id": "modid",
+	"id": "yclient",
 	"version": "${version}",
-	"name": "Yskins!",
-	"description": "This is made for those of you who want to change skins/capes but you are offline-account",
+	"name": "YClient",
+	"description": "A lightweight client with local skins and capes, HUD and survival tools.",
 	"authors": [
 		"Yappsz1fps"
 	],
 	"contact": {
 		"homepage": "https://fabricmc.net/",
-		"sources": "https://github.com/FabricMC/fabric-example-mod"
+		"sources": "https://github.com/PangkriX-Hub/Yskinss"
 	},
 	"license": "CC0-1.0",
 	"icon": "assets/modid/icon.png",
 	"environment": "*",
 	"entrypoints": {
 		"main": [
-			"com.example.ExampleMod"
+			"com.example.ExampleMod",
+			"com.yclient.YClientMod"
 		],
 		"client": [
-			"com.example.client.ExampleModClient"
+			"com.example.client.ExampleModClient",
+			"com.yclient.YClientClient"
 		]
 	},
 	"mixins": [
